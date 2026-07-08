@@ -56,7 +56,9 @@ Contact us for access/purchase Crazybets.cc :
 - Website: Blixbet.net
 - Telegram: t.me/hesuse
 - Discord: Find me on discord by searching [hesues] <= im active here
-- 
+
+  
 #  Youtube video coming soon! Please check directly on Blixbet.net fow now Thank you! <3 
+# For any concerns or inquiry. Contact me via Telegram: t.me/hesuse
 
 ⚠️ Note: The website may receive updates over time, so the images shown above might not exactly reflect the most current design or features. Please visit crazybets.cc to view the live version for the latest look and functionality.
