@@ -52,7 +52,7 @@ This includes:
   
 Takes only 15 minutes to install blixbet on your vps server!
 
-Contact us for access/purchase Crazybets.cc :
+Contact us for access/purchase Blixbet.net :
 - Website: Blixbet.net
 - Telegram: t.me/hesuse
 - Discord: Find me on discord by searching [hesues] <= im active here
