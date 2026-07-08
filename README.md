@@ -11,35 +11,36 @@ REQUIREMENTS:
 - Nginx or Caddy (reverse proxy)
 - 2GB+ RAM recommended
 
-Takes only 15 minutes to install blixbet on your vps server!
-
-
 ## Desktop Version
 
 <img width="1918" height="934" alt="Image" src="https://github.com/user-attachments/assets/e5e92f7d-712d-4a97-9794-40ca8ccf89d5" />
 <img width="1920" height="932" alt="Image" src="https://github.com/user-attachments/assets/3a57c392-2c01-4326-b935-c80388eef173" />
 <img width="1916" height="933" alt="Image" src="https://github.com/user-attachments/assets/2febe75e-0d8e-4e41-a4d1-0a503b79d7e5" />
-![Image](https://github.com/user-attachments/assets/69eea58d-5055-43fb-aae1-23469a28f169)
-![Image](https://github.com/user-attachments/assets/74663888-daa9-4d66-9605-d6f46e595ce9)
-![Image](https://github.com/user-attachments/assets/bb05ec0a-2a3c-45cf-9a47-b431e8815cf8)
-![Image](https://github.com/user-attachments/assets/26040f19-c303-43c5-9716-13078dfd0028)
-![Image](https://github.com/user-attachments/assets/69e1a9b8-885f-4753-a9a4-2682254d8d39)
-![Image](https://github.com/user-attachments/assets/aef4df34-3246-424c-95d7-709e0780fede)
-![Image](https://github.com/user-attachments/assets/f3a94ce2-7c40-4ace-92a9-813a50f26c59)
-## 🔗 Want to see more? Visit the full site: blixbet.net
+<img width="1920" height="935" alt="Image" src="https://github.com/user-attachments/assets/f713cf3f-329d-4d49-81ef-256d97394ccc" />
+<img width="1920" height="931" alt="Image" src="https://github.com/user-attachments/assets/51683a59-715b-4e24-af04-f2e3c41c09b3" />
+<img width="1920" height="938" alt="Image" src="https://github.com/user-attachments/assets/8f744c7e-d1bd-49fd-a2b5-9950f8539992" />
+<img width="1918" height="935" alt="Image" src="https://github.com/user-attachments/assets/89a1cd55-5933-454b-b046-8868bdd754f6" />
+<img width="1919" height="930" alt="Image" src="https://github.com/user-attachments/assets/cf61f3c4-b70d-42bf-b96a-5c5c76c34964" />
+<img width="1917" height="934" alt="Image" src="https://github.com/user-attachments/assets/5b4cafaa-8daf-4fdb-af9b-f2969f8e65fc" />
+<img width="1918" height="931" alt="Image" src="https://github.com/user-attachments/assets/148047c4-c2d9-4c14-afdc-9a5ce479b7af" />
+<img width="1917" height="932" alt="Image" src="https://github.com/user-attachments/assets/8af750b5-7539-4c3a-bbf3-992fae46f972" />
+<img width="1919" height="936" alt="Image" src="https://github.com/user-attachments/assets/9333b3d9-44d5-4769-b40e-58bfb7299865" />
+<img width="1919" height="932" alt="Image" src="https://github.com/user-attachments/assets/751d5007-fc5c-4c06-87d0-1fea07899496" />
+## 🔗 Theres more features! Want to see more? Visit the full site: Blixbet.net
 
 
 ## Mobile Version
 
-![Mobile Version 1](https://github.com/user-attachments/assets/da605d5c-490f-4f88-a795-e864fba7fb54)
-![Mobile Version 2](https://github.com/user-attachments/assets/0d5a63ff-47b1-4aa0-9c4f-7bb265df919b)
-![Mobile Version 3](https://github.com/user-attachments/assets/b89d1a25-be8d-4c8e-bc82-40c7f0842ab3)
-![Mobile Version 4](https://github.com/user-attachments/assets/792809ec-c030-4eaf-96cb-20e6c6d3f8f8)
-## 🔗 Want to see more? Visit the full site: blixbet.net
+<img width="496" height="925" alt="Image" src="https://github.com/user-attachments/assets/a4e1ec67-fc22-4012-bf52-2719738db00a" />
+<img width="491" height="924" alt="Image" src="https://github.com/user-attachments/assets/7bfb0f4c-8be2-457f-99d9-d9e5e723ee39" />
+<img width="493" height="925" alt="Image" src="https://github.com/user-attachments/assets/32867bed-4007-40c4-9e37-e15f41088359" />
+<img width="493" height="923" alt="Image" src="https://github.com/user-attachments/assets/52026968-5f43-4b94-9b52-99e7df6087d3" />
+## 🔗 Theres more features! Want to see more? Visit the full site: blixbet.net
 
 ## Additional Information
 
-For clients interested in purchasing the Blixbet.net pre-made template, we offer a fully functional online casino package. This includes:
+For clients interested in purchasing the Blixbet.net pre-made template, we offer a fully functional online casino package. Production Ready!
+This includes:
 - Over 800+ slot and live casino games https://blixbet.net/slots
 - 10 House games! Crash, Chicken Cross, Blackjack, Dice, Mines, Towers, Plinko, Slides, Roulette, Cups
 - Sports Betting * New! * https://blixbet.net/sports
@@ -48,11 +49,14 @@ For clients interested in purchasing the Blixbet.net pre-made template, we offer
 - Crypto deposit and withdrawal system
 - Bonus system, referral program, Promotions system, user profiles, and much more!
 - Sophisticated Admin Panel
+  
+Takes only 15 minutes to install blixbet on your vps server!
 
 Contact us for access/purchase Crazybets.cc :
 - Website: Blixbet.net
 - Telegram: t.me/hesuse
 - Discord: Find me on discord by searching [hesues] <= im active here
-# https://www.youtube.com/watch?v=prFl0EPIZIc&t=188s <Youtube video here
+- 
+#  Youtube video coming soon! Please check directly on Blixbet.net fow now Thank you! <3 
 
 ⚠️ Note: The website may receive updates over time, so the images shown above might not exactly reflect the most current design or features. Please visit crazybets.cc to view the live version for the latest look and functionality.
