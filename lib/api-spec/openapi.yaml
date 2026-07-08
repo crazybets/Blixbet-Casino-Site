@@ -1,0 +1,854 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: Blixbet Casino API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: auth
+    description: Auth operations
+  - name: users
+    description: User operations
+  - name: wallet
+    description: Wallet operations
+  - name: games
+    description: Game operations
+  - name: chat
+    description: Chat operations
+  - name: admin
+    description: Admin operations
+  - name: live-feed
+    description: Live feed operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterBody"
+      responses:
+        "201":
+          description: User registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Username already taken
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginBody"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /wallet/balance:
+    get:
+      operationId: getBalance
+      tags: [wallet]
+      summary: Get wallet balance
+      responses:
+        "200":
+          description: Balance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WalletBalance"
+
+  /wallet/deposit:
+    post:
+      operationId: deposit
+      tags: [wallet]
+      summary: Deposit coins
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DepositBody"
+      responses:
+        "200":
+          description: Deposit successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WalletBalance"
+
+  /wallet/withdraw:
+    post:
+      operationId: withdraw
+      tags: [wallet]
+      summary: Withdraw coins
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WithdrawBody"
+      responses:
+        "200":
+          description: Withdraw successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WalletBalance"
+        "400":
+          description: Insufficient funds
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /wallet/transactions:
+    get:
+      operationId: getTransactions
+      tags: [wallet]
+      summary: Get transaction history
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: Transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransactionList"
+
+  /games/bet:
+    post:
+      operationId: placeBet
+      tags: [games]
+      summary: Place a bet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetBody"
+      responses:
+        "200":
+          description: Bet result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetResult"
+        "400":
+          description: Insufficient funds or invalid bet
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /games/live-feed:
+    get:
+      operationId: getLiveFeed
+      tags: [live-feed]
+      summary: Get live feed of recent bets
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: filter
+          in: query
+          schema:
+            type: string
+            enum: [all, high-wins, lucky-wins]
+            default: all
+      responses:
+        "200":
+          description: Live feed entries
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiveFeedList"
+
+  /games/stats:
+    get:
+      operationId: getGameStats
+      tags: [games]
+      summary: Get game statistics and popular games
+      responses:
+        "200":
+          description: Game stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameStats"
+
+  /chat/messages:
+    get:
+      operationId: getChatMessages
+      tags: [chat]
+      summary: Get recent chat messages
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        "200":
+          description: Chat messages
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatMessageList"
+
+  /chat/send:
+    post:
+      operationId: sendChatMessage
+      tags: [chat]
+      summary: Send a chat message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendChatMessageBody"
+      responses:
+        "201":
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatMessage"
+
+  /admin/users:
+    get:
+      operationId: adminGetUsers
+      tags: [admin]
+      summary: Get all users (admin)
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Users list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminUserList"
+
+  /admin/users/{id}:
+    patch:
+      operationId: adminUpdateUser
+      tags: [admin]
+      summary: Update user (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminUpdateUserBody"
+      responses:
+        "200":
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /admin/stats:
+    get:
+      operationId: adminGetStats
+      tags: [admin]
+      summary: Get financial dashboard stats (admin)
+      responses:
+        "200":
+          description: Platform stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
+  /admin/transactions:
+    get:
+      operationId: adminGetTransactions
+      tags: [admin]
+      summary: Get all transactions (admin)
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [bet, deposit, withdrawal]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, approved, declined, completed, expired, partially_paid, refunded, reversed, overpaid]
+      responses:
+        "200":
+          description: Transactions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminTransactionList"
+
+  /admin/transactions/{id}/status:
+    patch:
+      operationId: adminUpdateTransactionStatus
+      tags: [admin]
+      summary: Update transaction status (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTransactionStatusBody"
+      responses:
+        "200":
+          description: Transaction updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminTransaction"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required: [status]
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required: [error]
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required: [success]
+
+    RegisterBody:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 30
+        password:
+          type: string
+          minLength: 6
+        email:
+          type: string
+          format: email
+      required: [username, password]
+
+    LoginBody:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required: [username, password]
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+      required: [user, token]
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+          nullable: true
+        balance:
+          type: number
+        avatar:
+          type: string
+          nullable: true
+        role:
+          type: string
+          enum: [user, admin]
+        banned:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        totalWagered:
+          type: number
+        bonusLocked:
+          type: number
+        hasAdminAccess:
+          type: boolean
+      required: [id, username, balance, role, banned, createdAt]
+
+    WalletBalance:
+      type: object
+      properties:
+        balance:
+          type: number
+        userId:
+          type: integer
+      required: [balance, userId]
+
+    DepositBody:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 0.01
+      required: [amount]
+
+    WithdrawBody:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 0.01
+      required: [amount]
+
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        type:
+          type: string
+          enum: [bet, deposit, withdrawal]
+        amount:
+          type: number
+        balanceBefore:
+          type: number
+        balanceAfter:
+          type: number
+        status:
+          type: string
+          enum: [pending, approved, declined, completed]
+        metadata:
+          type: object
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, userId, type, amount, balanceBefore, balanceAfter, status, createdAt]
+
+    TransactionList:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transaction"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+      required: [transactions, total, page, limit]
+
+    BetBody:
+      type: object
+      properties:
+        game:
+          type: string
+          enum: [crash, mines, dice]
+        amount:
+          type: number
+          minimum: 1
+        options:
+          type: object
+          nullable: true
+      required: [game, amount]
+
+    BetResult:
+      type: object
+      properties:
+        win:
+          type: boolean
+        multiplier:
+          type: number
+        payout:
+          type: number
+        newBalance:
+          type: number
+        transactionId:
+          type: integer
+      required: [win, multiplier, payout, newBalance, transactionId]
+
+    LiveFeedEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        game:
+          type: string
+        username:
+          type: string
+        avatar:
+          type: string
+          nullable: true
+        amount:
+          type: number
+        multiplier:
+          type: number
+        payout:
+          type: number
+        time:
+          type: string
+          format: date-time
+      required: [id, game, username, amount, multiplier, payout, time]
+
+    LiveFeedList:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: "#/components/schemas/LiveFeedEntry"
+      required: [entries]
+
+    GameStats:
+      type: object
+      properties:
+        games:
+          type: array
+          items:
+            $ref: "#/components/schemas/GameInfo"
+        onlinePlayers:
+          type: integer
+      required: [games, onlinePlayers]
+
+    GameInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        tag:
+          type: string
+          nullable: true
+        maxMultiplier:
+          type: number
+          nullable: true
+        isNew:
+          type: boolean
+      required: [id, name, isNew]
+
+    ChatMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        username:
+          type: string
+        avatar:
+          type: string
+          nullable: true
+        totalWagered:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, userId, username, message, createdAt]
+
+    ChatMessageList:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChatMessage"
+      required: [messages]
+
+    SendChatMessageBody:
+      type: object
+      properties:
+        message:
+          type: string
+          minLength: 1
+          maxLength: 500
+      required: [message]
+
+    AdminUser:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+          nullable: true
+        balance:
+          type: number
+        role:
+          type: string
+          enum: [user, admin]
+        banned:
+          type: boolean
+        ipAddress:
+          type: string
+          nullable: true
+        totalBets:
+          type: integer
+        totalWagered:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, username, balance, role, banned, totalBets, totalWagered, createdAt]
+
+    AdminUserList:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/AdminUser"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+      required: [users, total, page, limit]
+
+    AdminUpdateUserBody:
+      type: object
+      properties:
+        balance:
+          type: number
+        banned:
+          type: boolean
+        frozen:
+          type: boolean
+        role:
+          type: string
+          enum: [user, admin]
+
+    AdminStats:
+      type: object
+      properties:
+        totalUsers:
+          type: integer
+        totalDeposits:
+          type: number
+        totalWithdrawals:
+          type: number
+        totalBetsAmount:
+          type: number
+        totalPayoutsAmount:
+          type: number
+        ggr:
+          type: number
+        activeToday:
+          type: integer
+        recentTransactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/AdminTransaction"
+      required: [totalUsers, totalDeposits, totalWithdrawals, totalBetsAmount, totalPayoutsAmount, ggr, activeToday, recentTransactions]
+
+    AdminTransaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        username:
+          type: string
+        type:
+          type: string
+          enum: [bet, deposit, withdrawal]
+        amount:
+          type: number
+        balanceBefore:
+          type: number
+        balanceAfter:
+          type: number
+        status:
+          type: string
+          enum: [pending, approved, declined, completed]
+        metadata:
+          type: object
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required: [id, userId, username, type, amount, balanceBefore, balanceAfter, status, createdAt]
+
+    AdminTransactionList:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/AdminTransaction"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+      required: [transactions, total, page, limit]
+
+    UpdateTransactionStatusBody:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [pending, approved, declined, completed]
+      required: [status]
